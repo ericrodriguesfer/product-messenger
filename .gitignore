@@ -1,0 +1,15 @@
+node_modules
+.env
+
+consumer-bucket-s3/node_modules
+consumer-bucket-s3/.env
+
+process-sheet-insert-dynamo/node_modules
+process-sheet-insert-dynamo/.env
+
+infrastructure/terraform.tfvars
+infrastructure/local.tfvars
+infrastructure/production.tfvars
+infrastructure/.terraform
+infrastructure/terraform.tfstate
+infrastructure/terraform.tfstate.backup
