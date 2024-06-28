@@ -59,12 +59,10 @@ resource "aws_dynamodb_table" "dynamodb_table" {
     type = "S"
   }
 
-
   attribute {
     name = "uuid"
     type = "S"
   }
-
 
   attribute {
     name = "subcategory"
