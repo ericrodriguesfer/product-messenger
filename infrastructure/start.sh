@@ -8,4 +8,4 @@ tflocal init
 echo "Appling terraform declartions to local cloud..."
 tflocal apply -var-file="local.tfvars" -auto-approve
 
-echo "Your infrastrucuture is successfully standing..."
+echo "Your infrastructure is successfully standing..."
