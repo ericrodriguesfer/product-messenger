@@ -7,16 +7,17 @@ import { Logger } from "@logger/index";
 import { QueueConsumer } from "@consumer/index";
 
 const logger: ILogger = new Logger(Env.SERVICE_NAME);
+const queueConsumer = new QueueConsumer(logger);
 
-const queueConsumer = new QueueConsumer(logger).getInstance(
-  Env.SQS_QUEUE_URL,
-  new SQSClient({
-    region: Env.REGION,
-    credentials: {
-      accessKeyId: Env.ACCESS_KEY_ID,
-      secretAccessKey: Env.SECRET_ACCESS_ID,
-    },
-  })
-);
-
-queueConsumer.start();
+queueConsumer
+  .getInstance(
+    Env.SQS_QUEUE_URL,
+    new SQSClient({
+      region: Env.REGION,
+      credentials: {
+        accessKeyId: Env.ACCESS_KEY_ID,
+        secretAccessKey: Env.SECRET_ACCESS_ID,
+      },
+    })
+  )
+  .start();
