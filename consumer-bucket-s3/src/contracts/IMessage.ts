@@ -37,3 +37,7 @@ export interface IBodyMessage {
 }
 
 export interface IMessage extends Message {}
+
+export interface IHandleMessage {
+  handleMessage?(message: IMessage): Promise<Message | void>;
+}
