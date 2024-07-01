@@ -16,6 +16,5 @@ export class HandleMessage implements IHandleMessage {
   public async handleMessage(message: IMessage): Promise<Message | void> {
     if (!message) return;
     const messageBody = JSON.parse(message.Body ?? "") as IBodyMessage;
-    console.log(messageBody);
   }
 }

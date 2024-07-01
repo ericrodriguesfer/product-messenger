@@ -1,4 +1,3 @@
-import { Consumer } from "sqs-consumer";
 import { SQSClient } from "@aws-sdk/client-sqs";
 
 import { Env } from "@environment/index";
@@ -7,7 +6,7 @@ import { Logger } from "@logger/index";
 import { QueueConsumer } from "@consumer/index";
 
 const logger: ILogger = new Logger(Env.SERVICE_NAME);
-const queueConsumer = new QueueConsumer(logger);
+const queueConsumer: QueueConsumer = new QueueConsumer(logger);
 
 queueConsumer
   .getInstance(
