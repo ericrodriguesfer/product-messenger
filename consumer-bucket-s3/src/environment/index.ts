@@ -11,6 +11,7 @@ const envSchema = z.object({
   ACCESS_KEY_ID: z.string(),
   SECRET_ACCESS_ID: z.string(),
   SERVICE_NAME: z.string(),
+  PROCESS_SHEET_API_URL: z.string(),
   NODE_ENV: nodeEnv.default("development").optional(),
 });
 
