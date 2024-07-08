@@ -1,7 +1,13 @@
 import { Router } from "express";
 
 import { ProcessSheetController } from "@controller/index";
+import { IController } from "@contracts/index";
 
 export const routes: Router = Router();
 
-routes.post("/receive-sheet", new ProcessSheetController().handle);
+const processSheetControler: IController = new ProcessSheetController();
+
+routes.post(
+  "/receive-sheet",
+  processSheetControler.handle.bind(processSheetControler)
+);

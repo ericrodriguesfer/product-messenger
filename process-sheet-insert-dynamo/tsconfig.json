@@ -36,7 +36,13 @@
       "@controller/*": ["./src/controller/*"],
       "@environment/*": ["./src/environment/*"],
       "@routes/*": ["./src/routes/*"],
-      "@use-case/*": ["./src/use-case/*"]
+      "@use-case/*": ["./src/use-case/*"],
+      "@utils/*": ["./src/utils/*"],
+      "@bucketS3/*": ["./src/libraries/aws/bucketS3/*"],
+      "@dynamoDB/*": ["./src/libraries/aws/dynamoDb/*"],
+      "@sheet/*": ["./src/libraries/sheet/*"],
+      "@logger/*": ["./src/logger/*"],
+      "@filters/*": ["./src/filters/*"]
     },                                      /* Specify a set of entries that re-map imports to additional lookup locations. */
     // "rootDirs": [],                                   /* Allow multiple folders to be treated as one when resolving modules. */
     // "typeRoots": [],                                  /* Specify multiple folders that act like './node_modules/@types'. */
