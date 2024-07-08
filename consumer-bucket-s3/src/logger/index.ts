@@ -17,6 +17,8 @@ export class Logger implements ILogger {
         ),
         error?.message
       );
+
+      return;
     }
 
     console.log(
