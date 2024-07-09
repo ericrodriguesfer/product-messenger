@@ -4,4 +4,4 @@ README in updating...
 
 ## Architecture diagram
 
-![Architecture diagram image](./assets/architecture-diagram.png)
+![Architecture diagram image](./assets/architecture-diagram-updated.png)
