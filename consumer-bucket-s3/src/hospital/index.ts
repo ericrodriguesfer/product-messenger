@@ -1,10 +1,10 @@
-import { Consumer } from "sqs-consumer";
 import { SQSClient } from "@aws-sdk/client-sqs";
+import { Consumer } from "sqs-consumer";
 
 import { IBodyMessage, ILogger, IQueueConsumer } from "@contracts/index";
-import { HandleMessageConsumer } from "@/handlers/index";
+import { HandleMessageHospital } from "@handlers/index";
 
-export class QueueConsumer implements IQueueConsumer {
+export class HospitalConsumer implements IQueueConsumer {
   private consumer: Consumer | null;
   private logger: ILogger<IBodyMessage>;
 
@@ -15,7 +15,7 @@ export class QueueConsumer implements IQueueConsumer {
 
   public getInstance(queueUrl: string, sqs: SQSClient): Consumer {
     if (!this.consumer) {
-      const handleMessage = new HandleMessageConsumer(this.logger);
+      const handleMessage = new HandleMessageHospital(this.logger);
 
       this.consumer = Consumer.create({
         queueUrl,
@@ -34,17 +34,7 @@ export class QueueConsumer implements IQueueConsumer {
   private configureEmitters(): void {
     this.consumer &&
       this.consumer.on("message_received", () => {
-        this.logger.debug("Message received with sucess", {});
-      });
-
-    this.consumer &&
-      this.consumer.on("processing_error", (error) => {
-        this.logger.debug("Error in processing received message", { error });
-      });
-
-    this.consumer &&
-      this.consumer.on("error", (error) => {
-        this.logger.debug("Error during received message", { error });
+        this.logger.debug("Message received with sucess", { isHospital: true });
       });
   }
 }

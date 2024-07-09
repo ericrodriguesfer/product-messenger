@@ -34,8 +34,9 @@
       "@contracts/*": ["./src/contracts/*"],
       "@environment/*": ["./src/environment/*"],
       "@logger/*": ["./src/logger/*"],
-      "@handle/*": ["./src/handle/*"],
+      "@handlers/*": ["./src/handlers/*"],
       "@consumer/*": ["./src/consumer/*"],
+      "@hospital/*": ["./src/hospital/*"],
       "@api/*": ["./src/api/*"],
       "@constants/*": ["./src/constants/*"]
     },                                      /* Specify a set of entries that re-map imports to additional lookup locations. */

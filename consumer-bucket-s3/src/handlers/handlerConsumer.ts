@@ -9,10 +9,10 @@ import {
 import { processSheetApi } from "@api/index";
 import { PATH_ROUTES_PROCESS_SHEET_API } from "@constants/index";
 
-export class HandleMessage implements IHandleMessage {
-  private logger: ILogger;
+export class HandleMessageConsumer implements IHandleMessage {
+  private logger: ILogger<IBodyMessage>;
 
-  constructor(logger: ILogger) {
+  constructor(logger: ILogger<IBodyMessage>) {
     this.logger = logger;
   }
 
@@ -21,7 +21,7 @@ export class HandleMessage implements IHandleMessage {
 
     const messageBody = JSON.parse(message.Body ?? "") as IBodyMessage;
 
-    this.logger.debug("Sending sheet key to processing service");
+    this.logger.debug("Sending sheet key to processing service", {});
 
     const response = await processSheetApi.post(
       PATH_ROUTES_PROCESS_SHEET_API.RECEIVE_SHEET.toString(),
@@ -30,7 +30,7 @@ export class HandleMessage implements IHandleMessage {
       }
     );
 
-    this.logger.debug("Receiving response of process sheet service");
+    this.logger.debug("Receiving response of process sheet service", {});
 
     if (response.status === 200) return;
   }

@@ -7,6 +7,7 @@ const nodeEnv = z.enum(["development", "production"]);
 
 const envSchema = z.object({
   SQS_QUEUE_URL: z.string(),
+  SQS_DLQ_URL: z.string(),
   REGION: z.string(),
   ACCESS_KEY_ID: z.string(),
   SECRET_ACCESS_ID: z.string(),

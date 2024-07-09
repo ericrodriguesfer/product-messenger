@@ -1,19 +1,29 @@
 import chalk from "chalk";
 
-import { ILogger } from "@contracts/index";
+import {
+  IBodyMessage,
+  ILogger,
+  ILoggerOptionsConfiguration,
+} from "@contracts/index";
+import { QUEUES_CONSUMERS } from "@constants/index";
 
-export class Logger implements ILogger {
+export class Logger<T extends IBodyMessage> implements ILogger<T> {
   private serviceName: string;
 
   constructor(serviceName: string) {
     this.serviceName = serviceName;
   }
 
-  debug(message: string, error?: Error): void {
+  debug(
+    message: string,
+    { data, error, isHospital }: ILoggerOptionsConfiguration<T>
+  ): void {
     if (error) {
       console.log(
         chalk.red(
-          `[${this.serviceName} | ${new Date().toISOString()}]: ${message}`
+          `[${this.serviceName} | ${
+            isHospital ? QUEUES_CONSUMERS.HOSPITAL : QUEUES_CONSUMERS.CONSUMER
+          } | ${new Date().toISOString()}]: ${message}`
         ),
         error?.message
       );
@@ -21,9 +31,24 @@ export class Logger implements ILogger {
       return;
     }
 
+    if (data) {
+      console.log(
+        chalk.yellow(
+          `[${this.serviceName} | ${
+            isHospital ? QUEUES_CONSUMERS.HOSPITAL : QUEUES_CONSUMERS.CONSUMER
+          } | ${new Date().toISOString()}]: ${message}`
+        ),
+        data.Records[0].s3.object.key
+      );
+
+      return;
+    }
+
     console.log(
-      chalk.yellow(
-        `[${this.serviceName} | ${new Date().toISOString()}]: ${message}`
+      chalk.green(
+        `[${this.serviceName} | ${
+          isHospital ? QUEUES_CONSUMERS.HOSPITAL : QUEUES_CONSUMERS.CONSUMER
+        } | ${new Date().toISOString()}]: ${message}`
       )
     );
   }

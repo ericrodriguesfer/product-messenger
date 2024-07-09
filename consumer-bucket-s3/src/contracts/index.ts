@@ -1,7 +1,17 @@
-import { Message } from "@aws-sdk/client-sqs";
+import { Message, SQSClient } from "@aws-sdk/client-sqs";
+import { Consumer } from "sqs-consumer";
 
-export interface ILogger {
-  debug(message: string, error?: Error): void;
+export interface ILoggerOptionsConfiguration<T> {
+  error?: Error;
+  isHospital?: boolean;
+  data?: T;
+}
+
+export interface ILogger<T> {
+  debug(
+    message: string,
+    { data, error, isHospital }: ILoggerOptionsConfiguration<T>
+  ): void;
 }
 
 interface IBucket {
@@ -44,4 +54,8 @@ export interface IMessage extends Message {}
 
 export interface IHandleMessage {
   handleMessage?(message: IMessage): Promise<Message | void>;
+}
+
+export interface IQueueConsumer {
+  getInstance(queueUrl: string, sqs: SQSClient): Consumer;
 }
