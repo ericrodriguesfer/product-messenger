@@ -1,7 +1,9 @@
 data "aws_region" "current" {}
 
 resource "aws_sqs_queue" "queue" {
-  name = var.queue_name
+  name                        = var.queue_name
+  fifo_queue                  = var.fifo_queue
+  content_based_deduplication = var.content_based_deduplication
 
   policy = <<POLICY
     {
@@ -21,6 +23,26 @@ resource "aws_sqs_queue" "queue" {
       ]
     }
     POLICY
+}
+
+resource "aws_sqs_queue" "dead_letter" {
+  name                        = var.dlq_name
+  fifo_queue                  = var.fifo_queue
+  content_based_deduplication = var.content_based_deduplication
+
+  redrive_allow_policy = jsonencode({
+    redrivePermission = "byQueue"
+    sourceQueueArns   = [aws_sqs_queue.queue.arn]
+  })
+}
+
+resource "aws_sqs_queue_redrive_policy" "queue" {
+  queue_url = aws_sqs_queue.queue.id
+
+  redrive_policy = jsonencode({
+    deadLetterTargetArn = aws_sqs_queue.dead_letter.arn
+    maxReceiveCount     = var.max_receive_count
+  })
 }
 
 resource "aws_s3_bucket" "bucket" {

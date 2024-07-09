@@ -49,3 +49,21 @@ variable "metadata_api_check" {
 variable "requesting_account_id" {
   type = bool
 }
+
+variable "fifo_queue" {
+  type    = bool
+  default = false
+}
+
+variable "content_based_deduplication" {
+  type    = bool
+  default = false
+}
+
+variable "dlq_name" {
+  type = string
+}
+
+variable "max_receive_count" {
+  type = number
+}
